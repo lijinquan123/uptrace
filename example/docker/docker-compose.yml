@@ -7,15 +7,15 @@ services:
     environment:
       CLICKHOUSE_DB: uptrace
     healthcheck:
-      test: ['CMD', 'wget', '--spider', '-q', 'localhost:8123/ping']
+      test: ['CMD', 'wget', '--spider', '-q', 'localhost:59004/ping']
       interval: 1s
       timeout: 1s
       retries: 30
     volumes:
       - ch_data2:/var/lib/clickhouse
     ports:
-      - '8123:8123'
-      - '9000:9000'
+      - '59004:59004'
+      - '59002:59002'
 
   postgres:
     image: postgres:15-alpine
@@ -33,7 +33,7 @@ services:
     volumes:
       - 'pg_data3:/var/lib/postgresql/data/pgdata'
     ports:
-      - '5432:5432'
+      - '59003:59003'
 
   uptrace:
     image: 'uptrace/uptrace:1.7.2'
@@ -44,8 +44,8 @@ services:
     #environment:
     #  - DEBUG=2
     ports:
-      - '14317:14317'
-      - '14318:14318'
+      - '59000:59000'
+      - '59001:59001'
 
   otelcol:
     image: otel/opentelemetry-collector-contrib:0.88.0
@@ -53,8 +53,8 @@ services:
     volumes:
       - ./otel-collector.yaml:/etc/otelcol-contrib/config.yaml
     ports:
-      - '4317:4317'
-      - '4318:4318'
+      - '59006:59006'
+      - '59007:59007'
     extra_hosts:
       - 'host.docker.internal:host-gateway'
 
@@ -62,8 +62,8 @@ services:
     image: axllent/mailpit
     restart: always
     ports:
-      - 1025:1025
-      - 8025:8025
+      - 59005:59005
+      - 59008:59008
     environment:
       MP_MAX_MESSAGES: 5000
       MP_DATA_FILE: /data/mailpit.db
@@ -84,7 +84,7 @@ services:
       - ../../config/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
       - ../../config/grafana/custom.ini:/etc/grafana/grafana.ini
     ports:
-      - '3000:3000'
+      - '59009:59009'
     extra_hosts:
       - 'host.docker.internal:host-gateway'
 

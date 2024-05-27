@@ -1,5 +1,23 @@
 # Uptrace Docker demo
 
+## 端口替换
+
+* 14317 -> 59000
+* 14318 -> 59001
+* 9000 -> 59002
+* 5432 -> 59003
+* 8123 -> 59004
+* 1025 -> 59005
+* 4317 -> 59006
+* 4318 -> 59007
+* 8025 -> 59008
+* 3000 -> 59009
+* 1777 -> 59010
+* 55679 -> 59011
+* 13133 -> 59012
+* 13134 -> 59013
+* 8888 -> 59014
+
 ## Getting started
 
 This example demonstrates how to quickly start Uptrace using Docker. To run Uptrace permanently, you
@@ -26,7 +44,7 @@ docker-compose up -d
 docker-compose logs uptrace
 ```
 
-**Step 4**. Open Uptrace UI at [http://localhost:14318](http://localhost:14318)
+**Step 4**. Open Uptrace UI at [http://localhost:59001](http://localhost:59001)
 
 Uptrace will monitor itself using [uptrace-go](https://github.com/uptrace/uptrace-go) OpenTelemetry
 distro. To get some test data, just reload the UI few times. It usually takes about 30 seconds for
@@ -38,7 +56,7 @@ To configure OpenTelemetry for your programming language, see
 ## Alerting
 
 This example uses MailHog to test email notifications. Open
-[http://localhost:8025](http://localhost:8025) to view available email notifications.
+[http://localhost:59008](http://localhost:59008) to view available email notifications.
 
 See [Alerting and Notifications](https://uptrace.dev/get/alerting.html) for more details.
 

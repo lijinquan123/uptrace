@@ -1,9 +1,9 @@
 extensions:
   health_check:
   pprof:
-    endpoint: 0.0.0.0:1777
+    endpoint: 0.0.0.0:59010
   zpages:
-    endpoint: 0.0.0.0:55679
+    endpoint: 0.0.0.0:59011
 
 receivers:
   otlp:
@@ -22,16 +22,16 @@ receivers:
       paging:
   httpcheck:
     targets:
-      - endpoint: 'http://localhost:13133/health/status'
+      - endpoint: 'http://localhost:59012/health/status'
         method: GET
-      - endpoint: 'http://localhost:13134/health/status'
+      - endpoint: 'http://localhost:59013/health/status'
         method: GET
     collection_interval: 15s
   jaeger:
     protocols:
       grpc:
   postgresql:
-    endpoint: postgres:5432
+    endpoint: postgres:59003
     transport: tcp
     username: uptrace
     password: uptrace
@@ -45,7 +45,7 @@ receivers:
         - job_name: 'otelcol'
           scrape_interval: 10s
           static_configs:
-            - targets: ['0.0.0.0:8888']
+            - targets: ['0.0.0.0:59014']
 
 processors:
   resourcedetection:
@@ -56,19 +56,19 @@ processors:
 
 exporters:
   otlp/uptrace:
-    endpoint: http://uptrace:14317
+    endpoint: http://uptrace:59000
     tls: { insecure: true }
-    headers: { 'uptrace-dsn': 'http://project1_secret_token@localhost:14318?grpc=14317' }
+    headers: { 'uptrace-dsn': 'http://project1_secret_token@localhost:59001?grpc=59000' }
   prometheusremotewrite/uptrace:
-    endpoint: 'http://uptrace:14318/api/v1/prometheus/write'
+    endpoint: 'http://uptrace:59001/api/v1/prometheus/write'
     tls:
       insecure: true
-    headers: { 'uptrace-dsn': 'http://project1_secret_token@localhost:14318?grpc=14317' }
+    headers: { 'uptrace-dsn': 'http://project1_secret_token@localhost:59001?grpc=59000' }
 
 service:
   telemetry:
     metrics:
-      address: ':8888'
+      address: ':59014'
   #   logs:
   #     level: DEBUG
   pipelines:

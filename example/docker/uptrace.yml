@@ -17,7 +17,7 @@
 ## ClickHouse database credentials.
 ##
 ch:
-  addr: clickhouse:9000
+  addr: clickhouse:59002
   user: default
   password:
   database: uptrace
@@ -34,7 +34,7 @@ ch:
 ## and so on.
 ##
 pg:
-  addr: postgres:5432
+  addr: postgres:59003
   user: uptrace
   password: uptrace
   database: uptrace
@@ -146,11 +146,11 @@ ch_schema:
 listen:
   # OTLP/gRPC API.
   grpc:
-    addr: ':14317'
+    addr: ':59000'
 
   # OTLP/HTTP API and Uptrace API with UI.
   http:
-    addr: ':14318'
+    addr: ':59001'
 
   # tls:
   #   cert_file: config/tls/uptrace.crt
@@ -199,7 +199,7 @@ uptrace_go:
   # Enabled by default.
   #disabled: true
 
-  # dsn: http://project1_secret_token@localhost:14317/1
+  # dsn: http://project1_secret_token@localhost:59000/1
   # tls:
   #   cert_file: config/tls/uptrace.crt
   #   key_file: config/tls/uptrace.key
@@ -215,7 +215,7 @@ smtp_mailer:
   # SMTP server host.
   host: mailpit
   # SMTP server port.
-  port: 1025
+  port: 59005
   # Username for authentication.
   username: mailpit
   # Password for authentication.
